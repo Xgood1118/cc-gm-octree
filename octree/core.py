@@ -34,3 +34,8 @@ def query_box(root, box):
     """盒子查询"""
     raise NotImplementedError("query_box 尚未实现")
 
+
+def load_points(path):
+    """读入与落盘辅助"""
+    raise NotImplementedError("load_points 尚未实现")
+
