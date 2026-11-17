@@ -20,16 +20,6 @@ class Node:
     points: list = field(default_factory=list)
 
 
-def Node:
-    """class"""
-    raise NotImplementedError("Node 尚未实现")
-
-
-def AABB:
-    """class"""
-    raise NotImplementedError("AABB 尚未实现")
-
-
 def build_octree(points, capacity, max_depth):
     """建树"""
     raise NotImplementedError("build_octree 尚未实现")
@@ -43,9 +33,4 @@ def query_sphere(root, center, r):
 def query_box(root, box):
     """盒子查询"""
     raise NotImplementedError("query_box 尚未实现")
-
-
-def load_points(path):
-    """读入与落盘辅助"""
-    raise NotImplementedError("load_points 尚未实现")
 
