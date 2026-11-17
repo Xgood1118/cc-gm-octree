@@ -1,0 +1,53 @@
+{
+  "hits": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      -1,
+      0,
+      2
+    ],
+    [
+      -1,
+      0,
+      2
+    ]
+  ],
+  "query": "box",
+  "region": {
+    "hi": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "lo": [
+      -2.0,
+      -2.0,
+      -2.0
+    ]
+  },
+  "stats": {
+    "brute_force_hit_count": 5,
+    "candidate_nodes": 5,
+    "extra_vs_brute_force": [],
+    "hit_count": 5,
+    "max_depth": 2,
+    "missing_vs_brute_force": [],
+    "node_count": 6,
+    "points_tested": 5,
+    "total_points": 6
+  }
+}
