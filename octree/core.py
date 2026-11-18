@@ -20,14 +20,8 @@ class Node:
     points: list = field(default_factory=list)
 
 
-def Node:
-    """class"""
-    raise NotImplementedError("Node 尚未实现")
 
 
-def AABB:
-    """class"""
-    raise NotImplementedError("AABB 尚未实现")
 
 
 def build_octree(points, capacity, max_depth):

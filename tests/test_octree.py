@@ -21,6 +21,8 @@ def test_empty_tree():
 
 
 # ===== v2 契约测试：初始全部失败，实现后必须通过 =====
+import octree  # noqa: E402
+
 
 
 def _pts(n=12):
