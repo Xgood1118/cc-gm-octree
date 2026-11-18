@@ -1,6 +1,16 @@
 {
   "hits": [
     [
+      -1,
+      0,
+      2
+    ],
+    [
+      -1,
+      0,
+      2
+    ],
+    [
       0,
       0,
       0
@@ -14,18 +24,13 @@
       1,
       1,
       1
-    ],
-    [
-      -1,
-      0,
-      2
-    ],
-    [
-      -1,
-      0,
-      2
     ]
   ],
+  "params": {
+    "capacity": 4,
+    "max_depth": 6,
+    "max_nodes": null
+  },
   "query": "sphere",
   "region": {
     "center": [
@@ -35,15 +40,24 @@
     ],
     "radius": 2.5
   },
+  "reproducibility": {
+    "build_twice_identical": true,
+    "query_twice_identical": true,
+    "tree_sha256": "1cb98622058473c33b91f936becb0590c373df6f6cdc8e7a5b9f1cb8c6ece52a"
+  },
   "stats": {
     "brute_force_hit_count": 5,
     "candidate_nodes": 5,
     "extra_vs_brute_force": [],
     "hit_count": 5,
+    "leaf_count": 4,
     "max_depth": 2,
     "missing_vs_brute_force": [],
     "node_count": 6,
+    "node_scan_saved_ratio": 0.0,
     "points_tested": 5,
-    "total_points": 6
+    "total_points": 6,
+    "tree_levels": 3,
+    "visited_nodes": 6
   }
 }
