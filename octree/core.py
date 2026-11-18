@@ -358,3 +358,23 @@ def brute_force_box(points, box):
     if not isinstance(box, AABB):
         box = AABB(tuple(box.lo), tuple(box.hi))
     return [tuple(p) for p in points if _point_in_box(tuple(p), box)]
+
+
+def insert_point(root, point):
+    """插入一个点，返回新的根或原地更新；分裂规则与构建一致。"""
+    raise NotImplementedError("insert_point 尚未实现")
+
+
+def remove_point(root, point):
+    """删除一个点；空节点回收，树深不膨胀。"""
+    raise NotImplementedError("remove_point 尚未实现")
+
+
+def tree_stats(root):
+    """返回 dict(nodes=节点数, depth=树深, leaves=叶子数)。"""
+    raise NotImplementedError("tree_stats 尚未实现")
+
+
+def query_many(root, queries):
+    """批量查询，返回每个查询的结果与访问节点数。"""
+    raise NotImplementedError("query_many 尚未实现")

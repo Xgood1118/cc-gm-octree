@@ -287,3 +287,46 @@ def test_invalid_arguments():
     root = octree.build_octree([(0.0, 0.0, 0.0)], 4, 6)
     with pytest.raises(ValueError):
         octree.query_sphere(root, (0.0, 0.0, 0.0), -1.0)
+
+
+# ===== v2 契约测试：初始全部失败，实现后必须通过 =====
+import octree as broadphase_oct  # noqa: E402
+
+
+def test_insert_matches_rebuild():
+    base = [(0.1, 0.2, 0.3), (0.9, 0.8, 0.7), (0.5, 0.5, 0.5)]
+    root = broadphase_oct.build_octree(list(base), 2, 6)
+    root = broadphase_oct.insert_point(root, (0.3, 0.3, 0.3))
+    rebuilt = broadphase_oct.build_octree(list(base) + [(0.3, 0.3, 0.3)], 2, 6)
+    assert broadphase_oct.dumps_tree(root) == broadphase_oct.dumps_tree(rebuilt)
+
+
+def test_remove_matches_rebuild_and_shrinks():
+    pts = [(0.1, 0.1, 0.1), (0.2, 0.2, 0.2), (0.9, 0.9, 0.9), (0.75, 0.15, 0.5)]
+    root = broadphase_oct.build_octree(list(pts), 1, 8)
+    before = broadphase_oct.tree_stats(root)
+    root = broadphase_oct.remove_point(root, (0.9, 0.9, 0.9))
+    after = broadphase_oct.tree_stats(root)
+    rebuilt = broadphase_oct.build_octree([p for p in pts if p != (0.9, 0.9, 0.9)], 1, 8)
+    assert broadphase_oct.dumps_tree(root) == broadphase_oct.dumps_tree(rebuilt)
+    assert after["depth"] <= before["depth"]
+
+
+def test_max_nodes_bounds_growth_keeps_correctness():
+    pts = [(i / 20.0, (i * 3 % 20) / 20.0, (i * 7 % 20) / 20.0) for i in range(20)]
+    root = broadphase_oct.build_octree(pts, 1, 12, max_nodes=9)
+    st = broadphase_oct.tree_stats(root)
+    assert st["nodes"] <= 9
+    res = broadphase_oct.query_sphere(root, (0.5, 0.5, 0.5), 0.4)
+    assert sorted(res) == sorted(broadphase_oct.brute_force_sphere(pts, (0.5, 0.5, 0.5), 0.4))
+
+
+def test_query_many_matches_single():
+    pts = [(i / 10.0, (i * i % 10) / 10.0, 0.5) for i in range(10)]
+    root = broadphase_oct.build_octree(pts, 2, 6)
+    qs = [((0.2, 0.2, 0.5), 0.2), ((0.8, 0.8, 0.5), 0.3)]
+    many = broadphase_oct.query_many(root, qs)
+    for q, r in zip(qs, many):
+        single = broadphase_oct.query_sphere(root, q[0], q[1])
+        assert sorted(r["hits"]) == sorted(single)
+        assert r["visited"] <= r["total"]
